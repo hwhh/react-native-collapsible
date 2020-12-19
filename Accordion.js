@@ -33,6 +33,10 @@ export default class Accordion extends Component {
     sectionContainerStyle: ViewPropTypes.style,
     containerStyle: ViewPropTypes.style,
     renderAsFlatList: PropTypes.bool,
+    onEndReached: PropTypes.func,
+    onEndReachedThreshold: PropTypes.number,
+    ListEmptyComponent: PropTypes.element,
+    scrollEnabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -47,6 +51,10 @@ export default class Accordion extends Component {
     numColumns: 1,
     sectionContainerStyle: {},
     renderAsFlatList: false,
+    onEndReached: () => null,
+    onEndReachedThreshold: 0.5,
+    ListEmptyComponent: <></>,
+    scrollEnabled: true,
   };
 
   _toggleSection(section) {
@@ -122,6 +130,10 @@ export default class Accordion extends Component {
       keyExtractor,
       renderContent,
       renderAsFlatList,
+      onEndReached,
+      onEndReachedThreshold,
+      ListEmptyComponent,
+      scrollEnabled,
     } = this.props;
 
     const renderCollapsible = (section, key) => (
@@ -142,6 +154,10 @@ export default class Accordion extends Component {
           extraData={activeSections}
           nestedScrollEnabled={true}
           keyExtractor={keyExtractor}
+          ListEmptyComponent={ListEmptyComponent}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={onEndReachedThreshold}
+          scrollEnabled={scrollEnabled}
           renderItem={({ item, index }) => {
             const section = item;
             const key = keyExtractor(item, index);
