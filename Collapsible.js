@@ -89,7 +89,7 @@ export default class Collapsible extends Component {
             if (typeof this.contentHandle.measure === 'function') {
               ref = this.contentHandle;
             } else {
-              ref = this.contentHandle.getNode();
+              ref = this.contentHandle;
             }
             ref.measure((x, y, width, height) => {
               this.setState(
